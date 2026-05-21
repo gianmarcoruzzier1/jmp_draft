@@ -23,13 +23,16 @@
 
 - I did not alter the old PDF because the plan says not to rewrite paper content and to leave the old PDF unchanged if source regeneration is unavailable.
 - I did not add redirects because GitHub Pages cannot issue a true HTTP 301 for this old PDF without additional hosting configuration, and the plan requires the old PDF URL to remain available.
-- I did not commit, push, deploy, scrape Google Scholar, or edit Google Sites.
+- I initially did not commit, push, or deploy until the user explicitly authorized it. After authorization, I committed and pushed the `gh-pages` changes.
+- I did not scrape Google Scholar or edit Google Sites.
 - The plan's validation commands were translated to PowerShell equivalents where needed because this session is running in PowerShell on Windows.
 - A Playwright render check was attempted through the available Node runtime, but `playwright` is not installed there. I did not install new browser dependencies because the requested success checks are file and metadata based.
 
 ## Live URL check
 
-- `curl.exe -I https://gianmarcoruzzier1.github.io/jmp_draft/` returned HTTP 200, but the deployed page is still the old PDF auto-redirect page.
-- `curl.exe -I https://gianmarcoruzzier1.github.io/jmp_draft/specialized-banks-monetary-policy.pdf` returned HTTP 404 because the new stable PDF has not been deployed.
-- `curl.exe -I https://gianmarcoruzzier1.github.io/jmp_draft/draft_sbmp_gr_webpage.pdf` returned HTTP 200, confirming the old PDF URL remains publicly available.
-- This is expected because the implementation is local only. The user explicitly constrained the work with: do not commit, push, or deploy unless instructed.
+- Before deployment, `curl.exe -I https://gianmarcoruzzier1.github.io/jmp_draft/` returned HTTP 200 but served the old PDF auto-redirect page.
+- Before deployment, `curl.exe -I https://gianmarcoruzzier1.github.io/jmp_draft/specialized-banks-monetary-policy.pdf` returned HTTP 404 because the new stable PDF had not been deployed.
+- After the user authorized commit and push, commit `18985476a2bc12eb54788cb9b3a18e9471d30541` was pushed to `origin/gh-pages`.
+- After deployment, `curl.exe -I https://gianmarcoruzzier1.github.io/jmp_draft/` returned HTTP 200 with content length 5687, matching the new canonical landing page.
+- After deployment, `curl.exe -I https://gianmarcoruzzier1.github.io/jmp_draft/specialized-banks-monetary-policy.pdf` returned HTTP 200.
+- After deployment, `curl.exe -I https://gianmarcoruzzier1.github.io/jmp_draft/draft_sbmp_gr_webpage.pdf` returned HTTP 200, confirming the old PDF URL remains publicly available.
